@@ -87,7 +87,10 @@ async function _parallelRenderRoutes(
           }
         })
         .on('exit', resolve)
-        .on('error', reject);
+        .on('error', (err: any) => {
+          context.logger.warn(JSON.stringify(err));
+          reject(err);
+        });
     })
   );
 
